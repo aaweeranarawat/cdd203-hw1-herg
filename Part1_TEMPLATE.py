@@ -14,7 +14,7 @@ from sklearn.metrics import (accuracy_score, average_precision_score, confusion_
                              f1_score, precision_score, recall_score, roc_auc_score)
 
 # TODO 1: your group's names -> Part1_FIRST1-LAST1-FIRST2-LAST2.onnx
-NAME = "GROUP-MEMBER-NAMES-HERE"
+NAME = "Annie-Anya-Arefin-Miles"
 
 # TODO 2: your own threshold; justify it in README.md
 THRESHOLD = 0.5

@@ -14,3 +14,5 @@ gradio==5.35.0
 # rdkit==2023.9.6, torch==2.2.2, transformers==4.46.3. 
 # To use anything else, ask Peter first.
 
+
+rdkit==2023.9.6
