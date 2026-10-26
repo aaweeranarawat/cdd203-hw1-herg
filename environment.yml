@@ -1,0 +1,15 @@
+# CDD 203 Homework 1 environment.
+#   conda env create -f environment.yml
+#   conda activate cdd203-hw1
+#
+# conda pins the interpreter, pip installs the packages from requirements.txt,
+# so both routes give exactly the same environment. Run from this folder.
+
+name: cdd203-hw1
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+      - -r requirements.txt
