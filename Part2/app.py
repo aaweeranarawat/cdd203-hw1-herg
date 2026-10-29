@@ -5,6 +5,7 @@ Loads the submitted ONNX model and runs the exact same featurize() as the traini
 (herg_features.py is the shared module, copied unchanged next to this file).
 """
 
+import os
 from pathlib import Path
 
 import gradio as gr
@@ -90,4 +91,7 @@ with gr.Blocks(title="hERG blocker predictor", theme=gr.themes.Soft()) as demo:
                       smiles_box, result)
 
 if __name__ == "__main__":
-    demo.launch()
+    # Hosts such as Render pass the port in $PORT and need the server bound to all interfaces
+    hosted = "PORT" in os.environ
+    demo.launch(server_name="0.0.0.0" if hosted else None,
+                server_port=int(os.environ["PORT"]) if hosted else None)

@@ -1,0 +1,15 @@
+# Render blueprint for the hERG Gradio app. Connect a GitHub repo containing this file.
+services:
+  - type: web
+    name: herg-blocker-predictor
+    runtime: python
+    plan: free
+    rootDir: Part2
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    healthCheckPath: /
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: GRADIO_ANALYTICS_ENABLED
+        value: "False"
