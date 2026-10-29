@@ -1,0 +1,90 @@
+molecules 8000 | distinct scaffolds 4030 | largest scaffold group 70
+scaffold folds: train/val overlap in scaffolds = 0
+
+[1] random vs scaffold CV (AUROC, 5 folds)
+config  model random           scaffold         drop
+A       RF    0.861 +/- 0.006  0.811 +/- 0.009  -0.050
+A       ET    0.870 +/- 0.006  0.817 +/- 0.009  -0.054
+A       LR    0.793 +/- 0.006  0.708 +/- 0.018  -0.085
+B       RF    0.890 +/- 0.003  0.844 +/- 0.015  -0.046
+B       ET    0.882 +/- 0.005  0.830 +/- 0.012  -0.052
+B       LR    0.803 +/- 0.003  0.720 +/- 0.023  -0.083
+C       RF    0.908 +/- 0.003  0.860 +/- 0.014  -0.049
+C       ET    0.910 +/- 0.004  0.856 +/- 0.014  -0.054
+C       LR    0.853 +/- 0.009  0.781 +/- 0.017  -0.073
+
+[2] block ablation, RF, scaffold CV
+all five blocks (C)        0.860 +/- 0.014
+drop ecfp                  0.860 +/- 0.014   (+0.001)
+drop desc                  0.849 +/- 0.011   (-0.011)
+drop fcfp                  0.855 +/- 0.012   (-0.004)
+drop ap                    0.855 +/- 0.014   (-0.005)
+drop pharm                 0.857 +/- 0.013   (-0.002)
+desc alone                 0.827 +/- 0.017
+fcfp alone                 0.821 +/- 0.013
+ap alone                   0.835 +/- 0.015
+pharm alone                0.716 +/- 0.010
+
+[3] RF hyperparameters, config C, scaffold CV
+depth 20    leaf 1 max_features sqrt  0.861 +/- 0.013
+depth 20    leaf 1 max_features 0.05  0.866 +/- 0.014
+depth 20    leaf 2 max_features sqrt  0.860 +/- 0.014
+depth 20    leaf 2 max_features 0.05  0.865 +/- 0.014
+depth 20    leaf 5 max_features sqrt  0.851 +/- 0.013
+depth 20    leaf 5 max_features 0.05  0.859 +/- 0.014
+depth None  leaf 1 max_features sqrt  0.862 +/- 0.013
+depth None  leaf 1 max_features 0.05  0.867 +/- 0.015
+depth None  leaf 2 max_features sqrt  0.861 +/- 0.013
+depth None  leaf 2 max_features 0.05  0.866 +/- 0.014
+depth None  leaf 5 max_features sqrt  0.852 +/- 0.012
+depth None  leaf 5 max_features 0.05  0.859 +/- 0.014
+best: depth None leaf 1 max_features 0.05 -> 0.867
+
+[4] seed variance, RF defaults, scaffold CV
+AUROC per seed: 0.8592 0.8596 0.8600 0.8595 0.8592 | spread 0.0008
+
+[5] out-of-fold threshold curve, RF defaults, config C
+random CV  pooled OOF AUROC 0.908
+  thr    acc   prec   sens   spec
+  0.30  0.741  0.676  0.970  0.488
+  0.35  0.779  0.718  0.950  0.590
+  0.40  0.802  0.759  0.912  0.680
+  0.45  0.820  0.803  0.871  0.765
+  0.50  0.825  0.845  0.817  0.835
+  0.55  0.819  0.878  0.761  0.884
+  0.60  0.804  0.906  0.698  0.921
+scaffold CV  pooled OOF AUROC 0.858
+  thr    acc   prec   sens   spec
+  0.30  0.673  0.620  0.971  0.345
+  0.35  0.713  0.659  0.940  0.464
+  0.40  0.746  0.701  0.899  0.577
+  0.45  0.768  0.749  0.839  0.690
+  0.50  0.780  0.804  0.767  0.794
+  0.55  0.768  0.849  0.677  0.868
+  0.60  0.737  0.881  0.577  0.914
+
+[6] input stress test
+PASS  empty string               P=0.127
+PASS  whitespace                 P=0.127
+PASS  None                       P=0.127
+PASS  number                     P=0.127
+PASS  garbage                    P=0.127
+PASS  unclosed ring              P=0.127
+PASS  200 C                      P=0.569
+PASS  400 C                      P=0.569
+PASS  PEG 250 chars              P=0.396
+PASS  macrocycle (18-crown-6)    P=0.282
+PASS  salt 3 fragments           P=0.141
+PASS  metal complex              P=0.170
+PASS  all charged                P=0.160
+PASS  isotope                    P=0.118
+PASS  radical                    P=0.127
+PASS  inorganic                  P=0.099
+PASS  single atom                P=0.119
+PASS  stereo + aromatic          P=0.190
+PASS  terfenadine                P=0.809
+PASS  unicode                    P=0.129
+PASS  very long aromatic         P=0.617
+stress test: ALL PASS
+
+elapsed 303s
